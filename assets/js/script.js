@@ -1,29 +1,44 @@
 var textInput = document.querySelector (".textInput");
-var saveButton = document.querySelector("#save");
+
 var timeDisplayEl = document.querySelector("#currentDay")
 
 
-function saveInformation() {
-    var newData = formContent.value;
-    var data = localStorage.getItem("textInput" + index, newData)
-}
-
-
-var textArea = $("<textarea>");
-textArea.text("");
-textArea.appendTo(textInput)
-
-saveButton.addEventListener("click", function(){
-    saveInformation
-    console.log("save")
+// 
+// }
+$(".saveBtn").on("click",function(){
+  var textValue = $(this).siblings(".description").val()
+  var divId = $(this).parent().attr("id")
+  window.localStorage.setItem(divId,textValue)
 })
+$("#9 .description").val(localStorage.getItem("9"))
 
-function displayTime() {
-    var rightNow = moment().format('MMM DD, YYYY  hh:mm:ss');
-    timeDisplayEl.text(rightNow +"PM");
+function timeUpdater () {
+  var currentTime = moment().hours()
+
+
+  $(".time-block").each(function(){
+  var divTime = $(this).attr("id")
+  if (divTime<currentTime){
+    $(this).addClass("past")
+  }
+  else if (divTime==currentTime){
+    $(this).addClass("present")
+  }
+  else if (divTime>currentTime){
+    $(this).addClass("future")
   }
   
+  })
 
+
+}
+timeUpdater()
+function displayTime() {
+    var rightNow = moment().format("MMM DD, YYYY  hh:mm:ss");
+    timeDisplayEl.textContent = rightNow +"PM";
+  }
+  displayTime()
+   
 
 // var studentGrade = {
   //  student: student.value,
